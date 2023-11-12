@@ -1,4 +1,4 @@
 rootProject.name = 'Commerce'
 
-include ":app:http"
+include(":app:http", ":app:test")
 include(":identity:contract", ":identity:domainmodel", ":identity:dataaccess")

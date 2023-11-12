@@ -1,8 +1,11 @@
 package test.commerce.http.api
 
 import commerce.http.view.AccessTokenCarrier
+import commerce.identity.view.UserView
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
+import java.net.URI
 
 fun TestRestTemplate.signup(
     email: Email?,
@@ -21,8 +24,8 @@ fun TestRestTemplate.signup(
 fun TestRestTemplate.issueToken(
     email: Email?,
     password: String?
-): ResponseEntity<AccessTokenCarrier> {
-    return this.postForEntity(
+): String {
+    val response: ResponseEntity<AccessTokenCarrier> = this.postForEntity(
         "/api/issue-token",
         mapOf(
             "email" to email?.toString(),
@@ -30,4 +33,15 @@ fun TestRestTemplate.issueToken(
         ),
         AccessTokenCarrier::class.java
     )
+    return response.body!!.accessToken
+}
+
+fun TestRestTemplate.getMe(
+    token: String
+): ResponseEntity<UserView> {
+    val request: RequestEntity<Void> = RequestEntity
+        .get(URI("/api/me"))
+        .headers { it.setBearerAuth(token) }
+        .build()
+    return this.exchange(request, UserView::class.java)
 }

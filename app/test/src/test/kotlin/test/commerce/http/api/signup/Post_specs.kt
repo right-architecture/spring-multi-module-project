@@ -31,4 +31,26 @@ class Post_specs(@Autowired val client: TestRestTemplate) {
 
         assertThat(response.statusCode.value()).isEqualTo(200)
     }
+
+    @AutoParameterizedTest
+    fun `이메일이 설정되지 않으면 400 응답 코드를 반환한다`(password: String) {
+        val response: ResponseEntity<*> = client.postForEntity(
+            "/api/signup",
+            mapOf("password" to password),
+            Void::class.java
+        )
+
+        assertThat(response.statusCode.value()).isEqualTo(400)
+    }
+
+    @AutoParameterizedTest
+    fun `비밀번호가 설정되지 않으면 400 응답 코드를 반환한다`(email: Email) {
+        val response: ResponseEntity<*> = client.postForEntity(
+            "/api/signup",
+            mapOf("email" to email.toString()),
+            Void::class.java
+        )
+
+        assertThat(response.statusCode.value()).isEqualTo(400)
+    }
 }

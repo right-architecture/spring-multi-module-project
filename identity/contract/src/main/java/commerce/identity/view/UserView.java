@@ -1,4 +1,6 @@
 package commerce.identity.view;
 
-public record UserView() {
+import java.util.UUID;
+
+public record UserView(UUID id, String email) {
 }

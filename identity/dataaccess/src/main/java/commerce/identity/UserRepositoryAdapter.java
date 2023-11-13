@@ -6,6 +6,7 @@ import commerce.identity.querymodel.UserReader;
 import commerce.identity.view.UserView;
 
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 
 public class UserRepositoryAdapter implements UserRepository, UserReader {
@@ -26,6 +27,11 @@ public class UserRepositoryAdapter implements UserRepository, UserReader {
     }
 
     @Override
+    public Optional<UserView> findById(UUID id) {
+        return repository.findById(id).map(UserEntity::toView);
+    }
+
+    @Override
     public Optional<UserView> findByCredentials(
         String email,
         Function<String, Boolean> passwordVerifier
@@ -33,6 +39,6 @@ public class UserRepositoryAdapter implements UserRepository, UserReader {
         return repository
             .findByEmail(email)
             .filter(user -> passwordVerifier.apply(user.getPasswordHash()))
-            .map(user -> new UserView());
+            .map(UserEntity::toView);
     }
 }

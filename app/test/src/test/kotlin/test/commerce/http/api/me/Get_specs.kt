@@ -27,4 +27,18 @@ class Get_specs(@Autowired val client: TestRestTemplate) {
 
         assertThat(response.statusCode.value()).isEqualTo(200)
     }
+
+    @AutoParameterizedTest
+    fun `올바른 토큰에 대해 올바른 사용자 정보를 반환한다`(
+        email: Email,
+        password: String
+    ) {
+        client.signup(email, password)
+        val token: String = client.issueToken(email, password)
+
+        val response: ResponseEntity<UserView> = client.getMe(token)
+
+        assertThat(response.body).isNotNull
+        assertThat(response.body?.email).isEqualTo(email.toString())
+    }
 }

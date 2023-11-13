@@ -1,5 +1,6 @@
 package commerce.identity;
 
+import commerce.identity.view.UserView;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -16,4 +17,8 @@ public class UserEntity {
     private UUID id;
     private String email;
     private String passwordHash;
+
+    public UserView toView() {
+        return new UserView(id, email);
+    }
 }

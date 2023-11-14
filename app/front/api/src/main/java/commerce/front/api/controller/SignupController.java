@@ -1,6 +1,6 @@
-package commerce.http.controller;
+package commerce.front.api.controller;
 
-import commerce.http.command.Signup;
+import commerce.front.api.command.Signup;
 import commerce.identity.CreateUserCommandExecutor;
 import commerce.identity.UserRepository;
 import commerce.identity.command.CreateUser;

@@ -1,4 +1,4 @@
-package commerce.http.controller;
+package commerce.front.api.controller;
 
 import commerce.InvariantViolationException;
 import org.springframework.http.ResponseEntity;

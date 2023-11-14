@@ -1,4 +1,4 @@
-package commerce.http.controller;
+package commerce.front.api.controller;
 
 import commerce.identity.UserEntity;
 import commerce.identity.UserJpaRepository;

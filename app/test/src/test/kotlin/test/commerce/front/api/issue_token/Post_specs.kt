@@ -1,16 +1,16 @@
-package test.commerce.http.api.issue_token
+package test.commerce.front.api.issue_token
 
-import commerce.http.view.AccessTokenCarrier
+import commerce.front.api.view.AccessTokenCarrier
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.ResponseEntity
 import test.commerce.AutoParameterizedTest
-import test.commerce.http.api.AppTest
-import test.commerce.http.api.Email
-import test.commerce.http.api.signup
+import test.commerce.front.api.FrontApiTest
+import test.commerce.front.api.Email
+import test.commerce.front.api.signup
 
-@AppTest
+@FrontApiTest
 class Post_specs(@Autowired val client: TestRestTemplate) {
 
     @AutoParameterizedTest

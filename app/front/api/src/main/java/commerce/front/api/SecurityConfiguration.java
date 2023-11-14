@@ -1,4 +1,4 @@
-package commerce.http;
+package commerce.front.api;
 
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

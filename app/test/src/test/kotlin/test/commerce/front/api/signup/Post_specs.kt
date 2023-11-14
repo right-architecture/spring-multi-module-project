@@ -1,13 +1,13 @@
-package test.commerce.http.api.signup
+package test.commerce.front.api.signup
 
-import commerce.http.Application
+import commerce.front.api.Application
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.ResponseEntity
 import test.commerce.AutoParameterizedTest
-import test.commerce.http.api.Email
+import test.commerce.front.api.Email
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,

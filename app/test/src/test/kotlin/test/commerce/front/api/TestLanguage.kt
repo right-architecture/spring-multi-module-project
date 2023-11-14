@@ -1,6 +1,6 @@
-package test.commerce.http.api
+package test.commerce.front.api
 
-import commerce.http.view.AccessTokenCarrier
+import commerce.front.api.view.AccessTokenCarrier
 import commerce.identity.view.UserView
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.RequestEntity

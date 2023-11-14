@@ -5,6 +5,7 @@ import commerce.identity.command.CreateUser;
 import commerce.identity.CreateUserCommandExecutor;
 import commerce.identity.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,14 @@ import java.util.UUID;
 @RequestMapping("/api/signup")
 public class SignupController {
 
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository repository;
 
-    public SignupController(UserRepository userRepository) {
+    public SignupController(
+        PasswordEncoder passwordEncoder,
+        UserRepository userRepository
+    ) {
+        this.passwordEncoder = passwordEncoder;
         repository = userRepository;
     }
 
@@ -30,7 +36,7 @@ public class SignupController {
 
         var executor = new CreateUserCommandExecutor(repository);
 
-        String passwordHash = command.password();
+        String passwordHash = passwordEncoder.encode(command.password());
 
         executor.execute(
             UUID.randomUUID(),

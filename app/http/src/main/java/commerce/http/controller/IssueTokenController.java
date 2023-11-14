@@ -7,6 +7,7 @@ import commerce.identity.UserJpaRepository;
 import commerce.identity.view.UserView;
 import io.jsonwebtoken.JwtBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,16 @@ import java.util.function.Supplier;
 public class IssueTokenController {
 
     private final UserJpaRepository repository;
+    private final PasswordEncoder passwordEncoder;
     private final Supplier<JwtBuilder> jwtBuilderFactory;
 
     public IssueTokenController(
         UserJpaRepository repository,
+        PasswordEncoder passwordEncoder,
         Supplier<JwtBuilder> jwtBuilderFactory
     ) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
         this.jwtBuilderFactory = jwtBuilderFactory;
     }
 
@@ -36,7 +40,9 @@ public class IssueTokenController {
     ) {
         Optional<UserView> queryResult = repository
             .findByEmail(query.email())
-            .filter(user -> user.getPasswordHash().equals(query.password()))
+            .filter(user -> passwordEncoder.matches(
+                query.password(),
+                user.getPasswordHash()))
             .map(UserEntity::toView);
 
         return queryResult

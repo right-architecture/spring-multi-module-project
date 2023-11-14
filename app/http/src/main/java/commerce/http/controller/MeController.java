@@ -1,6 +1,7 @@
 package commerce.http.controller;
 
-import commerce.identity.querymodel.UserReader;
+import commerce.identity.jpa.UserEntity;
+import commerce.identity.jpa.UserJpaRepository;
 import commerce.identity.view.UserView;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +15,17 @@ import java.util.UUID;
 @RequestMapping("/api/me")
 public class MeController {
 
-    private final UserReader reader;
+    private final UserJpaRepository repository;
 
-    public MeController(UserReader userReader) {
-        reader = userReader;
+    public MeController(UserJpaRepository repository) {
+        this.repository = repository;
     }
 
     @GetMapping
     public ResponseEntity<UserView> get(Principal principal) {
-        UserView user = reader
+        UserView user = repository
             .findById(UUID.fromString(principal.getName()))
+            .map(UserEntity::toView)
             .orElseThrow(RuntimeException::new);
         return ResponseEntity.ok(user);
     }

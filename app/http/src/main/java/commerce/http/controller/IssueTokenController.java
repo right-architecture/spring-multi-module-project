@@ -2,7 +2,8 @@ package commerce.http.controller;
 
 import commerce.http.query.IssueToken;
 import commerce.http.view.AccessTokenCarrier;
-import commerce.identity.querymodel.UserReader;
+import commerce.identity.jpa.UserEntity;
+import commerce.identity.jpa.UserJpaRepository;
 import commerce.identity.view.UserView;
 import io.jsonwebtoken.JwtBuilder;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,14 @@ import java.util.function.Supplier;
 @RequestMapping("/api/issue-token")
 public class IssueTokenController {
 
-    private final UserReader reader;
+    private final UserJpaRepository repository;
     private final Supplier<JwtBuilder> jwtBuilderFactory;
 
     public IssueTokenController(
-        UserReader userReader,
+        UserJpaRepository repository,
         Supplier<JwtBuilder> jwtBuilderFactory
     ) {
-        reader = userReader;
+        this.repository = repository;
         this.jwtBuilderFactory = jwtBuilderFactory;
     }
 
@@ -33,9 +34,10 @@ public class IssueTokenController {
     public ResponseEntity<AccessTokenCarrier> issueToken(
         @RequestBody IssueToken query
     ) {
-        Optional<UserView> queryResult = reader.findByCredentials(
-            query.email(),
-            passwordHash -> passwordHash.equals(query.password()));
+        Optional<UserView> queryResult = repository
+            .findByEmail(query.email())
+            .filter(user -> user.getPasswordHash().equals(query.password()))
+            .map(UserEntity::toView);
 
         return queryResult
             .map(user -> {

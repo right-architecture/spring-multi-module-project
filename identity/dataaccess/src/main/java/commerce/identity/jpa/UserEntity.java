@@ -1,4 +1,4 @@
-package commerce.identity;
+package commerce.identity.jpa;
 
 import commerce.identity.view.UserView;
 import jakarta.persistence.Entity;

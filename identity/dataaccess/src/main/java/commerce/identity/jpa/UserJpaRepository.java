@@ -1,4 +1,4 @@
-package commerce.identity;
+package commerce.identity.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

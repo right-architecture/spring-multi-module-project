@@ -1,10 +1,9 @@
 package commerce.http;
 
-import commerce.identity.UserEntity;
-import commerce.identity.UserJpaRepository;
-import commerce.identity.UserRepositoryAdapter;
 import commerce.identity.commandmodel.UserRepository;
-import commerce.identity.querymodel.UserReader;
+import commerce.identity.jpa.UserEntity;
+import commerce.identity.jpa.UserJpaRepository;
+import commerce.identity.jpa.UserRepositoryAdapter;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -62,11 +61,6 @@ public class Application {
 
     @Bean
     public UserRepository userRepository(UserJpaRepository repository) {
-        return new UserRepositoryAdapter(repository);
-    }
-
-    @Bean
-    public UserReader userReader(UserJpaRepository repository) {
         return new UserRepositoryAdapter(repository);
     }
 }

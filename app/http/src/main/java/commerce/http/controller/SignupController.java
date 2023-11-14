@@ -2,8 +2,8 @@ package commerce.http.controller;
 
 import commerce.http.command.Signup;
 import commerce.identity.command.CreateUser;
-import commerce.identity.commandmodel.CreateUserCommandExecutor;
-import commerce.identity.commandmodel.UserRepository;
+import commerce.identity.CreateUserCommandExecutor;
+import commerce.identity.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

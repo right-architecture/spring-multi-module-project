@@ -2,8 +2,8 @@ package commerce.http.controller;
 
 import commerce.http.query.IssueToken;
 import commerce.http.view.AccessTokenCarrier;
-import commerce.identity.jpa.UserEntity;
-import commerce.identity.jpa.UserJpaRepository;
+import commerce.identity.UserEntity;
+import commerce.identity.UserJpaRepository;
 import commerce.identity.view.UserView;
 import io.jsonwebtoken.JwtBuilder;
 import org.springframework.http.ResponseEntity;

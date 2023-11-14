@@ -1,4 +1,4 @@
-package commerce.identity.commandmodel;
+package commerce.identity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

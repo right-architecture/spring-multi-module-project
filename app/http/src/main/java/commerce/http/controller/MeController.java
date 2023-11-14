@@ -1,7 +1,7 @@
 package commerce.http.controller;
 
-import commerce.identity.jpa.UserEntity;
-import commerce.identity.jpa.UserJpaRepository;
+import commerce.identity.UserEntity;
+import commerce.identity.UserJpaRepository;
 import commerce.identity.view.UserView;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

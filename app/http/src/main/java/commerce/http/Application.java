@@ -1,9 +1,7 @@
 package commerce.http;
 
-import commerce.identity.commandmodel.UserRepository;
-import commerce.identity.jpa.UserEntity;
-import commerce.identity.jpa.UserJpaRepository;
-import commerce.identity.jpa.UserRepositoryAdapter;
+import commerce.identity.UserEntity;
+import commerce.identity.UserJpaRepository;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -57,10 +55,5 @@ public class Application {
                 .requestMatchers("/api/issue-token").permitAll()
                 .anyRequest().authenticated());
         return http.build();
-    }
-
-    @Bean
-    public UserRepository userRepository(UserJpaRepository repository) {
-        return new UserRepositoryAdapter(repository);
     }
 }

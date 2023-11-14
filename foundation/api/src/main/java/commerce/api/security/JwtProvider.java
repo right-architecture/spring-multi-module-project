@@ -1,6 +1,5 @@
 package commerce.api.security;
 
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.config.Customizer;
@@ -9,10 +8,8 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 import javax.crypto.spec.SecretKeySpec;
-import java.util.function.Supplier;
 
 public class JwtProvider implements
-    Supplier<JwtBuilder>,
     Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>> {
 
     private final SecretKeySpec key;
@@ -30,9 +27,8 @@ public class JwtProvider implements
         return new JwtProvider(key, decoder);
     }
 
-    @Override
-    public JwtBuilder get() {
-        return Jwts.builder().signWith(key);
+    public String composeToken(String subject) {
+        return Jwts.builder().signWith(key).setSubject(subject).compact();
     }
 
     @Override

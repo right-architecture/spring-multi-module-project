@@ -1,5 +1,6 @@
 package commerce.identity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -14,6 +15,9 @@ public class OperatorEntity {
 
     @Id
     private UUID id;
+
     private String username;
+
+    @Column(length = 1000)
     private String passwordHash;
 }

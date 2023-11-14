@@ -18,7 +18,7 @@ public class CreateUserCommandExecutor {
             throw new InvariantViolationException();
         }
 
-        User user = new User(id, command.email(), command.passwordHash());
+        var user = new User(id, command.email(), command.passwordHash());
         repository.create(user);
     }
 }

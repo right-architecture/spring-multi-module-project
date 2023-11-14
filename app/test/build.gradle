@@ -16,6 +16,8 @@ repositories {
 
 dependencies {
     testImplementation(project(':app:front:api'))
+    testImplementation(project(':app:operation:api'))
+    testImplementation(project(':identity:contract'))
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'com.fasterxml.jackson.module:jackson-module-kotlin'

@@ -1,5 +1,5 @@
 rootProject.name = 'Commerce'
 
-include(":foundation:domainmodel")
+include(":foundation:domainmodel", ":foundation:api")
 include(':app:front:api', ':app:operation:api', ":app:test")
 include(":identity:contract", ":identity:domainmodel", ":identity:dataaccess")

@@ -1,10 +1,10 @@
 package test.commerce.front.api
 
-import commerce.front.api.Application
+import commerce.front.api.FrontApiApp
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [Application::class]
+    classes = [FrontApiApp::class]
 )
 annotation class FrontApiTest

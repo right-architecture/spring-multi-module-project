@@ -1,18 +1,14 @@
 package test.commerce.front.api.signup
 
-import commerce.front.api.Application
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.ResponseEntity
 import test.commerce.AutoParameterizedTest
 import test.commerce.front.api.Email
+import test.commerce.front.api.FrontApiTest
 
-@SpringBootTest(
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [Application::class]
-)
+@FrontApiTest
 class Post_specs(@Autowired val client: TestRestTemplate) {
 
     @AutoParameterizedTest

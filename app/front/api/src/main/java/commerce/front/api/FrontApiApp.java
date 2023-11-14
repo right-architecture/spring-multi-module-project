@@ -12,9 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableJpaRepositories(basePackageClasses = UserJpaRepository.class)
 @EntityScan(basePackageClasses = UserEntity.class)
 @EnableWebSecurity
-public class Application {
+public class FrontApiApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(FrontApiApp.class, args);
     }
 }

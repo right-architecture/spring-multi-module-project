@@ -11,4 +11,6 @@ repositories {
 }
 
 dependencies {
+    api project(path: ':bounded-context:inventory:contract')
+    api project(path: ':foundation:contract')
 }

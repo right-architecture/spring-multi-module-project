@@ -1,9 +1,8 @@
 package commerce.identity;
 
 import commerce.InvariantViolationException;
+import commerce.command.AggregateCommand;
 import commerce.identity.command.CreateUser;
-
-import java.util.UUID;
 
 public class CreateUserCommandExecutor {
 
@@ -13,12 +12,17 @@ public class CreateUserCommandExecutor {
         this.repository = repository;
     }
 
-    public void execute(UUID id, CreateUser command) {
-        if (command.email() == null || command.passwordHash() == null) {
+    public void execute(AggregateCommand<CreateUser> command) {
+        if (command.payload().email() == null ||
+            command.payload().passwordHash() == null) {
             throw new InvariantViolationException();
         }
 
-        var user = new User(id, command.email(), command.passwordHash());
+        var user = new User(
+            command.aggregateId(),
+            command.payload().email(),
+            command.payload().passwordHash());
+
         repository.create(user);
     }
 }

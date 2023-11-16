@@ -1,9 +1,8 @@
 package commerce.identity;
 
 import commerce.InvariantViolationException;
+import commerce.command.AggregateCommand;
 import commerce.identity.command.RegisterOperator;
-
-import java.util.UUID;
 
 public class RegisterOperatorCommandExecutor {
 
@@ -13,15 +12,16 @@ public class RegisterOperatorCommandExecutor {
         this.repository = repository;
     }
 
-    public void execute(UUID id, RegisterOperator command) {
-        if (command.username() == null || command.passwordHash() == null) {
+    public void execute(AggregateCommand<RegisterOperator> command) {
+        if (command.payload().username() == null ||
+            command.payload().passwordHash() == null) {
             throw new InvariantViolationException();
         }
 
         var operator = new Operator(
-            id,
-            command.username(),
-            command.passwordHash());
+            command.aggregateId(),
+            command.payload().username(),
+            command.payload().passwordHash());
 
         repository.create(operator);
     }

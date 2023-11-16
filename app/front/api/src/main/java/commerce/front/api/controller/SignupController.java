@@ -1,5 +1,6 @@
 package commerce.front.api.controller;
 
+import commerce.command.AggregateCommand;
 import commerce.front.api.command.Signup;
 import commerce.identity.CreateUserCommandExecutor;
 import commerce.identity.UserRepository;
@@ -30,10 +31,15 @@ public class SignupController {
     @PostMapping
     public void signup(@RequestBody Signup request) {
         UUID userId = UUID.randomUUID();
+
         String passwordHash = request.password() == null
             ? null
             : passwordEncoder.encode(request.password());
-        var command = new CreateUser(request.email(), passwordHash);
-        new CreateUserCommandExecutor(repository).execute(userId, command);
+
+        var command = new AggregateCommand<>(
+            userId,
+            new CreateUser(request.email(), passwordHash));
+
+        new CreateUserCommandExecutor(repository).execute(command);
     }
 }

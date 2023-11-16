@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     api project(path: ':bounded-context:identity:contract')
+    api project(path: ':foundation:contract')
     api project(path: ':foundation:domain-model')
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'

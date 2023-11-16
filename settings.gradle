@@ -1,7 +1,13 @@
 rootProject.name = 'Commerce'
 
-include(':foundation:domain-model', ":foundation:api")
-include(':app:front:api', ':app:operation:api', ":app:test")
-include(":bounded-context:identity:contract",
+include(':foundation:contract',
+        ':foundation:domain-model',
+        ':foundation:api')
+
+include(':bounded-context:identity:contract',
         ':bounded-context:identity:domain-model',
         ':bounded-context:identity:data-access')
+
+include(':app:front:api',
+        ':app:operation:api',
+        ':app:test')

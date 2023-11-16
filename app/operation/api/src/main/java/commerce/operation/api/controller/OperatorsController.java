@@ -1,5 +1,6 @@
 package commerce.operation.api.controller;
 
+import commerce.command.AggregateCommand;
 import commerce.identity.OperatorRepository;
 import commerce.identity.RegisterOperatorCommandExecutor;
 import commerce.identity.command.RegisterOperator;
@@ -29,12 +30,16 @@ public class OperatorsController {
 
     @PostMapping("/register")
     public void register(@RequestBody RegisterNewOperator request) {
-        var executor = new RegisterOperatorCommandExecutor(repository);
         UUID operatorId = UUID.randomUUID();
+
         String passwordHash = request.password() == null
             ? null
             : passwordEncoder.encode(request.password());
-        var command = new RegisterOperator(request.username(), passwordHash);
-        executor.execute(operatorId, command);
+
+        var command = new AggregateCommand<>(
+            operatorId,
+            new RegisterOperator(request.username(), passwordHash));
+
+        new RegisterOperatorCommandExecutor(repository).execute(command);
     }
 }

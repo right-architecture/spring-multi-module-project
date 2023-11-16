@@ -8,6 +8,11 @@ include(':bounded-context:identity:contract',
         ':bounded-context:identity:domain-model',
         ':bounded-context:identity:data-access')
 
+include(':bounded-context:inventory:contract',
+        ':bounded-context:inventory:domain-model',
+        ':bounded-context:inventory:data-access',
+        ':bounded-context:inventory:test')
+
 include(':app:front:api',
         ':app:operation:api',
         ':app:test')
